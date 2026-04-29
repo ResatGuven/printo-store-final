@@ -2,9 +2,17 @@ import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import ProductForm from '@/components/admin/ProductForm'
 
-export default async function EditProductPage({ params }: { params: { id: string } }) {
+// 1. params tipini Promise olarak güncelledik
+export default async function EditProductPage({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}) {
+  // 2. id'yi await ederek alıyoruz
+  const { id } = await params;
+
   const product = await prisma.product.findUnique({
-    where: { id: params.id },
+    where: { id: id }, // params.id yerine sadece id
     include: { images: true },
   })
 
