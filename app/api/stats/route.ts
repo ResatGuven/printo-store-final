@@ -26,7 +26,7 @@ export async function GET() {
       orderBy: { createdAt: 'desc' },
       include: {
         customer: { select: { name: true } },
-        items: { include: { product: { select: { name: true' } } }, take: 1 },
+        items: { include: { product: { select: { name: true } } }, take: 1 },
       },
     }),
     prisma.filamentStock.findMany(),
